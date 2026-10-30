@@ -1,0 +1,21 @@
+# Alternativa paga: mantém as reuniões em disco persistente.
+# Selecione este caminho no campo Blueprint Path, em vez de render.yaml.
+services:
+  - type: web
+    name: compiler-ai
+    runtime: python
+    plan: 0.5c-512mb
+    buildCommand: bash scripts/render-build.sh
+    startCommand: gunicorn --config gunicorn.conf.py api:app
+    healthCheckPath: /api/health
+    envVars:
+      - key: COMPILER_ENV
+        value: production
+      - key: COMPILER_DB_PATH
+        value: /var/data/compiler-ai/reunioes.db
+      - key: PYTHONUNBUFFERED
+        value: "1"
+    disk:
+      name: compiler-ai-data
+      mountPath: /var/data
+      sizeGB: 1

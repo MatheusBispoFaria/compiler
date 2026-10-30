@@ -6,11 +6,23 @@ venv/
 
 # Segredos
 .env
+.env.*
+!.env.example
 
 # Banco local
 reunioes.db
 reunioes.db-shm
 reunioes.db-wal
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+
+# Arquivos gerados pelo fluxo legado, sem dados reais no repositório
+data/transcricao.txt
+Data.json/dados.json
+frontend/public/data.json
 
 # Frontend
 frontend/node_modules/

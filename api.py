@@ -1,4 +1,4 @@
-"""API e publicação local do Compiler-AI."""
+"""API e entrega da interface do Compiler-AI em desenvolvimento e produção."""
 
 import os
 from pathlib import Path
@@ -8,7 +8,7 @@ from werkzeug.exceptions import RequestEntityTooLarge
 
 from analysis_service import analisar_conversa
 from conversation_assistant import responder
-from database import init_db, listar_reunioes, obter_reuniao, salvar_reuniao
+from database import init_db, listar_reunioes, obter_reuniao, salvar_reuniao, verificar_banco
 
 BASE_DIR = Path(__file__).resolve().parent
 FRONTEND_DIST = BASE_DIR / "frontend" / "dist"
@@ -16,7 +16,21 @@ MAX_TRANSCRIPT = 200_000
 
 app = Flask(__name__, static_folder=str(FRONTEND_DIST), static_url_path="")
 app.config["MAX_CONTENT_LENGTH"] = 2 * 1024 * 1024
+app.config["COMPILER_PRODUCTION"] = (
+    os.getenv("COMPILER_ENV", "").lower() == "production"
+    or os.getenv("RENDER", "").lower() == "true"
+)
 init_db()
+
+
+@app.after_request
+def response_headers(response):
+    if request.path.startswith("/api/"):
+        response.headers["Cache-Control"] = "no-store"
+    elif request.path == "/":
+        response.headers["Cache-Control"] = "no-cache"
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    return response
 
 
 def _transcript(payload):
@@ -35,11 +49,20 @@ def too_large(_error):
 def home():
     if (FRONTEND_DIST / "index.html").is_file():
         return send_from_directory(FRONTEND_DIST, "index.html")
+    if app.config["COMPILER_PRODUCTION"]:
+        return jsonify({"erro": "A interface ainda não está disponível. Verifique a compilação do serviço."}), 503
     return '<h1>Compiler-AI</h1><p>API ativa. Abra <a href="http://localhost:5173">a interface de desenvolvimento</a>.</p>'
 
 
 @app.get("/api/health")
 def health():
+    if app.config["COMPILER_PRODUCTION"] and not (FRONTEND_DIST / "index.html").is_file():
+        return jsonify({"status": "unavailable", "motivo": "frontend_missing"}), 503
+    try:
+        verificar_banco()
+    except Exception:
+        app.logger.exception("Falha na verificação do banco de reuniões")
+        return jsonify({"status": "unavailable", "motivo": "database_unavailable"}), 503
     return jsonify({"status": "ok", "assistente": "local", "max_transcript_chars": MAX_TRANSCRIPT})
 
 

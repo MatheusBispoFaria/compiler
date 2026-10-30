@@ -1,0 +1,17 @@
+# Demonstração gratuita: o histórico SQLite é temporário.
+# Para persistência, utilize deploy/render.persistent.yaml em vez deste arquivo.
+services:
+  - type: web
+    name: compiler-ai
+    runtime: python
+    plan: free
+    buildCommand: bash scripts/render-build.sh
+    startCommand: gunicorn --config gunicorn.conf.py api:app
+    healthCheckPath: /api/health
+    envVars:
+      - key: COMPILER_ENV
+        value: production
+      - key: COMPILER_DB_PATH
+        value: /tmp/compiler-ai/reunioes.db
+      - key: PYTHONUNBUFFERED
+        value: "1"

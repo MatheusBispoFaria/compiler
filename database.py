@@ -12,12 +12,15 @@ from business_signals import analisar_sinais_negocio
 from approaches import recomendar_abordagens
 
 BASE_DIR = Path(__file__).resolve().parent
-DB_PATH = Path(os.getenv("COMPILER_DB_PATH", str(BASE_DIR / "reunioes.db")))
+DB_PATH = Path(os.getenv("COMPILER_DB_PATH", "").strip() or BASE_DIR / "reunioes.db").expanduser()
+if not DB_PATH.is_absolute():
+    DB_PATH = BASE_DIR / DB_PATH
 
 
 @contextmanager
 def _connect():
-    conn = sqlite3.connect(DB_PATH)
+    DB_PATH.parent.mkdir(parents=True, exist_ok=True)
+    conn = sqlite3.connect(DB_PATH, timeout=15)
     conn.row_factory = sqlite3.Row
     conn.execute("PRAGMA foreign_keys = ON")
     try:
@@ -25,6 +28,12 @@ def _connect():
             yield conn
     finally:
         conn.close()
+
+
+def verificar_banco() -> None:
+    """Verifica a conexão e o schema sem alterar as reuniões salvas."""
+    with _connect() as conn:
+        conn.execute("SELECT id FROM reunioes LIMIT 1").fetchone()
 
 
 def init_db() -> None:

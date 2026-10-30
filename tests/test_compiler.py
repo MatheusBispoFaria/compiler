@@ -3,6 +3,8 @@
 from concurrent.futures import ThreadPoolExecutor
 import os
 from pathlib import Path
+import re
+import runpy
 import sys
 import tempfile
 import unittest
@@ -11,6 +13,11 @@ from unittest.mock import patch
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 os.environ["OPENAI_API_KEY"] = ""
+# api.py inicializa o banco ao importar. Isolamos também essa inicialização,
+# antes de os bancos de cada teste serem criados (o disco do Render não existe no build).
+IMPORT_DATABASE = tempfile.TemporaryDirectory(prefix="compiler-test-import-", dir=ROOT)
+os.environ["COMPILER_DB_PATH"] = str(Path(IMPORT_DATABASE.name) / "bootstrap.db")
+unittest.addModuleCleanup(IMPORT_DATABASE.cleanup)
 
 import api
 import database
@@ -173,6 +180,65 @@ class CompilerTests(unittest.TestCase):
             self.assertIn("Compiler-AI", response.get_data(as_text=True))
         finally:
             response.close()
+
+    def test_database_directory_is_created_for_hosted_storage(self):
+        nested = Path(self.directory.name) / "persistent" / "compiler" / "history.db"
+        with patch.object(database, "DB_PATH", nested):
+            database.init_db()
+            database.verificar_banco()
+            self.assertTrue(nested.is_file())
+            self.assertEqual(database.listar_reunioes(), [])
+
+    def test_health_checks_database_and_does_not_cache_meeting_data(self):
+        response = self.client.get("/api/health")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.get_json()["status"], "ok")
+        self.assertEqual(response.headers["Cache-Control"], "no-store")
+        history = self.client.get("/api/reunioes")
+        self.assertEqual(history.headers["Cache-Control"], "no-store")
+        with patch.object(api, "verificar_banco", side_effect=RuntimeError("database unavailable")):
+            with self.assertLogs(api.app.logger, level="ERROR"):
+                failure = self.client.get("/api/health")
+        self.assertEqual(failure.status_code, 503)
+        self.assertEqual(failure.get_json()["motivo"], "database_unavailable")
+
+    def test_missing_frontend_does_not_report_production_ready(self):
+        with patch.dict(api.app.config, {"COMPILER_PRODUCTION": True}):
+            with patch.object(api, "FRONTEND_DIST", Path(self.directory.name) / "absent-dist"):
+                response = self.client.get("/")
+                self.assertEqual(response.status_code, 503)
+                self.assertNotIn("localhost", response.get_data(as_text=True))
+                health = self.client.get("/api/health")
+                self.assertEqual(health.status_code, 503)
+                self.assertEqual(health.get_json()["motivo"], "frontend_missing")
+
+    def test_production_server_uses_the_port_provided_by_render(self):
+        with patch.dict(os.environ, {"PORT": "17321"}):
+            config = runpy.run_path(str(ROOT / "gunicorn.conf.py"))
+        self.assertEqual(config["bind"], "0.0.0.0:17321")
+        self.assertEqual(config["workers"], 1)
+        self.assertEqual(config["worker_class"], "gthread")
+        self.assertGreaterEqual(config["threads"], 2)
+
+    def test_compiled_assets_share_the_api_origin_and_exclude_legacy_data(self):
+        if not (ROOT / "frontend/dist/index.html").exists():
+            self.skipTest("Execute npm run build para verificar os arquivos compilados.")
+        with patch.dict(api.app.config, {"COMPILER_PRODUCTION": True}):
+            response = self.client.get("/")
+            try:
+                self.assertEqual(response.status_code, 200)
+                self.assertEqual(response.headers["Cache-Control"], "no-cache")
+                assets = re.findall(r'(?:src|href)="(/assets/[^"\s]+)"', response.get_data(as_text=True))
+                self.assertGreaterEqual(len(assets), 2)
+            finally:
+                response.close()
+            for asset in assets:
+                result = self.client.get(asset)
+                try:
+                    self.assertEqual(result.status_code, 200, asset)
+                finally:
+                    result.close()
+        self.assertEqual(self.client.get("/data.json").status_code, 404)
 
 
 if __name__ == "__main__":

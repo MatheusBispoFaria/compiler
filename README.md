@@ -2,6 +2,12 @@
 
 Aplicação independente para transformar transcrições de reuniões em uma leitura de negócio. Reaproveita a análise lexical, os sinais contextuais e o histórico SQLite do projeto anterior, com uma nova interface inspirada na referência visual Workly.
 
+## Deploy no Render
+
+O projeto inclui `render.yaml` para demonstração gratuita e `deploy/render.persistent.yaml` como alternativa paga com histórico persistente. A interface e a API rodam juntas em um único serviço. O build instala as dependências, compila o frontend e executa os testes; a produção inicia com Gunicorn.
+
+Siga o passo a passo em [DEPLOY_RENDER.md](DEPLOY_RENDER.md). Na configuração gratuita, o histórico SQLite é temporário e pode ser perdido após reinícios. O uso local continua disponível conforme as instruções abaixo.
+
 ## Usar a aplicação
 
 1. Execute `python api.py` em um terminal.
