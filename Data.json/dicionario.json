@@ -1,0 +1,212 @@
+{
+  "produtos_totvs": [
+    {
+      "nome": "TOTVS RM",
+      "categoria": "ERP RH",
+      "palavras_associadas": [
+        "folha de pagamento",
+        "gestão de pessoas",
+        "departamento pessoal",
+        "benefícios",
+        "holerite",
+        "atestados",
+        "RH"
+      ]
+    },
+    {
+      "nome": "TOTVS ClockIn",
+      "categoria": "Ponto Eletrônico",
+      "palavras_associadas": [
+        "ClockIn",
+        "controle de ponto",
+        "ponto eletrônico",
+        "batida de ponto",
+        "registro de ponto",
+        "geolocalização",
+        "biometria facial",
+        "jornada de trabalho"
+      ]
+    },
+    {
+      "nome": "TOTVS Fluig",
+      "categoria": "Workflow",
+      "palavras_associadas": [
+        "workflow",
+         "portal",
+        "documentos",
+        "processos"
+      ]
+    },
+    {
+     "nome": "TOTVS Protheus",
+  "categoria": "ERP Empresarial",
+  "palavras_associadas": [
+    "protheus",
+    "erp",
+    "financeiro",
+    "contas a pagar",
+    "contas a receber",
+    "fluxo de caixa",
+    "faturamento",
+    "nota fiscal",
+    "nf-e",
+    "estoque",
+    "controle de estoque",
+    "inventário",
+    "compras",
+    "pedido de compra",
+    "fornecedor",
+    "vendas",
+    "pedido de venda",
+    "custos",
+    "produção",
+    "mrp",
+    "fiscal",
+    "tributação",
+    "impostos",
+    "logística",
+    "expedição",
+    "almoxarifado"
+  ]
+}
+  ],
+
+  "tipos_reuniao": [
+    "vendas",
+    "suporte",
+    "implantacao",
+    "treinamento"
+  ],
+
+  "sentimentos_validos": [
+    "positivo",
+    "negativo",
+    "neutro"
+  ],
+
+  "palavras_chave_empresa": [
+    "SESMT",
+    "folha de pagamento",
+    "ponto eletrônico",
+    "integração",
+    "gestor",
+    "portal",
+    "atestado"
+  ],
+
+  "areas_empresa": {
+
+    "RH": [
+      "folha de pagamento",
+      "SESMT",
+      "gestão de pessoas",
+      "atestado",
+      "colaborador",
+      "funcionário"
+    ],
+
+    "TI": [
+      "integração",
+      "sistema",
+      "portal",
+      "segurança",
+      "workflow"
+    ],
+
+    "Operacao": [
+      "ponto eletrônico",
+      "gestor",
+      "supervisor",
+      "batida"
+    ],
+
+    "Comercial": [
+      "proposta",
+      "contrato",
+      "cliente",
+      "venda"
+    ]
+  },
+
+  "sentimentos_comportamentais": {
+
+    "possivel_cliente_acordo": [
+      "necessidade",
+      "implementar",
+      "potencializar",
+      "proposta",
+      "solucionar",
+      "trocar sistema",
+      "integração",
+      "avaliar solução",
+      "problemas no sistema",
+      "automatizar",
+      "melhorar processo"
+    ],
+
+    "medio_interesse": [
+      "analisar",
+      "conhecer",
+      "entender funcionamento",
+      "preciso conversar",
+      "observar"
+    ],
+
+    "pouco_interesse": [
+      "irei esperar",
+      "não sei",
+      "estou vendo",
+      "talvez futuramente",
+      "vamos avaliar depois"
+    ]
+  },
+
+  "problemas_encontrados": [
+    "problema",
+    "falha",
+    "travando",
+    "não funciona",
+    "erro",
+    "tilt",
+    "instabilidade",
+    "gargalo",
+    "bug",
+    "parando de funcionar",
+    "controle de ponto",
+    "batida"
+  ],  
+
+  "acoes_recomendadas": {
+
+    "RH": [
+      "Validar fluxo de folha de pagamento",
+      "Analisar gestão de atestados",
+      "Verificar integração com RH"
+    ],
+
+    "TI": [
+      "Agendar reunião técnica",
+      "Validar integração entre sistemas",
+      "Mapear falhas do portal"
+    ],
+
+    "Operacao": [
+      "Apresentar solução ClockIn",
+      "Demonstrar batida remota",
+      "Validar funcionamento operacional"
+    ],
+
+    "Comercial": [
+      "Enviar proposta comercial",
+      "Agendar próxima reunião",
+      "Apresentar diferenciais da solução"
+    ]
+
+  },
+  "empresas_conhecidas": [
+  "Hospital Alpha",
+  "Hospital Vida",
+  "TOTVS",
+  "Grupo Saúde"
+]
+}

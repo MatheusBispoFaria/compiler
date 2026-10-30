@@ -1,0 +1,270 @@
+{
+    "ID_MEETING": "12345",
+    "DT_MEETING": "2026-05-10 14:00:00",
+    "FORMATO_MEETING": "VoIP",
+    "STATUS_MEETING": "FINALIZADA",
+    "DURACAO_MEETING": "00:52:10",
+    "UF": "SP",
+    "NOME_SEGMENTO": "Saúde",
+    "FAIXA_FATURAMENTO": "10M-50M",
+    "ANON_TRANSCRICAO": "texto da reunião aqui...",
+    "insights_ia": {
+        "resumo": "A reunião com Rede Mercatto foi analisada com foco em relacionamento e oportunidade comercial. Foram identificadas menções a TOTVS RM, TOTVS Protheus. A leitura de negócio aponta risco de churn baixo, satisfação alta, potencial de upsell baixo, potencial de cross-sell alto, urgência alto, risco da oportunidade medio. As prioridades são: Definir responsável e prazo objetivo para o próximo retorno ao cliente.; Mapear a proposta concorrente e preparar diferenciais relevantes para o cliente.; Preparar demonstração ou proposta das soluções complementares que despertaram interesse..",
+        "palavras_chave": [
+            "ponto eletrônico",
+            "SESMT",
+            "folha de pagamento"
+        ],
+        "problemas_identificados": [
+            "sistema interno com falhas",
+            "processo complexo de atestados"
+        ],
+        "acoes_definidas": [
+            "avaliar solução TOTVS",
+            "analisar integração"
+        ],
+        "produtos_identificados": [
+            {
+                "produto": "TOTVS RM",
+                "pontuacao": 2,
+                "confianca": "BAIXA"
+            },
+            {
+                "produto": "TOTVS Protheus",
+                "pontuacao": 7,
+                "confianca": "MEDIA"
+            }
+        ],
+        "sentimento_reuniao": "positivo",
+        "nivel_prioridade": "alta",
+        "areas_detectadas": [
+            {
+                "area": "RH",
+                "pontuacao": 1
+            },
+            {
+                "area": "TI",
+                "pontuacao": 2
+            },
+            {
+                "area": "Comercial",
+                "pontuacao": 1
+            }
+        ],
+        "potencial_cliente": "ALTO",
+        "pontuacao_comercial": 6,
+        "problemas_detectados": [
+            "problema"
+        ],
+        "recomendacoes_ia": [
+            {
+                "area": "RH",
+                "acao": "Validar fluxo de folha de pagamento"
+            },
+            {
+                "area": "RH",
+                "acao": "Analisar gestão de atestados"
+            },
+            {
+                "area": "RH",
+                "acao": "Verificar integração com RH"
+            },
+            {
+                "area": "TI",
+                "acao": "Agendar reunião técnica"
+            },
+            {
+                "area": "TI",
+                "acao": "Validar integração entre sistemas"
+            },
+            {
+                "area": "TI",
+                "acao": "Mapear falhas do portal"
+            },
+            {
+                "area": "Comercial",
+                "acao": "Enviar proposta comercial"
+            },
+            {
+                "area": "Comercial",
+                "acao": "Agendar próxima reunião"
+            },
+            {
+                "area": "Comercial",
+                "acao": "Apresentar diferenciais da solução"
+            }
+        ],
+        "sugestoes_dicionario": [
+            {
+                "palvras": "camila",
+                "ocorrencia": 15,
+                "status": "pendente"
+            },
+            {
+                "palvras": "eduardo",
+                "ocorrencia": 10,
+                "status": "pendente"
+            },
+            {
+                "palvras": "beatriz",
+                "ocorrencia": 8,
+                "status": "pendente"
+            },
+            {
+                "palvras": "gustavo",
+                "ocorrencia": 7,
+                "status": "pendente"
+            },
+            {
+                "palvras": "totvs",
+                "ocorrencia": 5,
+                "status": "pendente"
+            },
+            {
+                "palvras": "larissa",
+                "ocorrencia": 5,
+                "status": "pendente"
+            },
+            {
+                "palvras": "precisamos",
+                "ocorrencia": 5,
+                "status": "pendente"
+            }
+        ],
+        "resumo_fonte": "local",
+        "resumo_modelo": "",
+        "resumo_aviso": "OPENAI_API_KEY não configurada; foi usado um resumo local.",
+        "sinais_negocio": {
+            "churn": {
+                "nivel": "BAIXO",
+                "score": 15,
+                "motivo": "Não aparecem sinais fortes de abandono da solução atual; há indícios de permanência ou estabilidade.",
+                "evidencias": []
+            },
+            "satisfacao": {
+                "nivel": "ALTA",
+                "score": 84,
+                "motivo": "Predominam declarações positivas sobre a solução ou o relacionamento atual.",
+                "evidencias": [
+                    "Larissa: Financeiramente o Protheus atende bem, mas temos dificuldade para consolidar informações das unidades."
+                ]
+            },
+            "upsell": {
+                "nivel": "BAIXO",
+                "score": 8,
+                "motivo": "Não foi encontrada intenção suficientemente clara de expansão do contrato/uso atual.",
+                "evidencias": []
+            },
+            "cross_sell": {
+                "nivel": "ALTO",
+                "score": 100,
+                "motivo": "Há intenção concreta de adoção de uma solução complementar, apoiada por falas da própria reunião.",
+                "evidencias": [
+                    "Camila: Perfeito.",
+                    "Gustavo: Concordo.",
+                    "Camila: Analytics é uma das soluções que podemos avaliar."
+                ]
+            },
+            "concorrencia": {
+                "nivel": "ALTO",
+                "score": 75,
+                "motivo": "Há concorrência ativa na decisão: Sankhya, Senior.",
+                "evidencias": [
+                    "Beatriz: E a Sankhya também está participando.",
+                    "Larissa: Em preço, a proposta da Sankhya veio bastante agressiva.",
+                    "Gustavo: A Senior já apresentou uma proposta."
+                ],
+                "concorrentes": [
+                    "Sankhya",
+                    "Senior"
+                ]
+            },
+            "urgencia": {
+                "nivel": "ALTO",
+                "score": 100,
+                "motivo": "Há prazo, prioridade ou necessidade explícita de retorno rápido.",
+                "evidencias": [
+                    "Eduardo: Precisamos dessas respostas até sexta.",
+                    "Eduardo: Queremos decidir o fornecedor nos próximos 30 dias."
+                ]
+            },
+            "risco_oportunidade": {
+                "nivel": "MEDIO",
+                "score": 52,
+                "motivo": "A oportunidade tem condicionantes relevantes, mas ainda pode avançar normalmente.",
+                "evidencias": [
+                    "Eduardo: Precisamos dessas respostas até sexta."
+                ]
+            }
+        },
+        "leitura_principal": [
+            {
+                "tipo": "risco",
+                "texto": "Há pressão competitiva ativa na decisão do cliente."
+            },
+            {
+                "tipo": "atencao",
+                "texto": "O cliente sinaliza urgência; prazo e responsável pelo retorno devem ser definidos."
+            },
+            {
+                "tipo": "oportunidade",
+                "texto": "Há interesse concreto em soluções TOTVS complementares ainda não adotadas."
+            },
+            {
+                "tipo": "positivo",
+                "texto": "A conta atual aparenta estabilidade, sem intenção forte de churn."
+            }
+        ],
+        "prioridades": [
+            {
+                "prioridade": "ALTA",
+                "tipo": "Follow-up",
+                "acao": "Definir responsável e prazo objetivo para o próximo retorno ao cliente.",
+                "motivo": "Há prazo ou urgência explícita."
+            },
+            {
+                "prioridade": "ALTA",
+                "tipo": "Competitivo",
+                "acao": "Mapear a proposta concorrente e preparar diferenciais relevantes para o cliente.",
+                "motivo": "Há concorrência ativa na decisão."
+            },
+            {
+                "prioridade": "MEDIA",
+                "tipo": "Cross-sell",
+                "acao": "Preparar demonstração ou proposta das soluções complementares que despertaram interesse.",
+                "motivo": "Há intenção concreta de adoção de outra solução."
+            }
+        ],
+        "diagnostico_intencoes": {
+            "metodo": "regras_contextuais",
+            "produtos": {
+                "TOTVS RM": {
+                    "mencionado": true,
+                    "produto_atual": false,
+                    "nao_utiliza": true,
+                    "interesse": true
+                },
+                "TOTVS Protheus": {
+                    "mencionado": true,
+                    "produto_atual": true,
+                    "nao_utiliza": false,
+                    "interesse": true
+                },
+                "TOTVS ClockIn": {
+                    "mencionado": true,
+                    "produto_atual": false,
+                    "nao_utiliza": false,
+                    "interesse": true
+                },
+                "TOTVS Analytics": {
+                    "mencionado": true,
+                    "produto_atual": false,
+                    "nao_utiliza": false,
+                    "interesse": true
+                }
+            }
+        }
+    },
+    "EMPRESA": "Rede Mercatto",
+    "cliente_recorrente": false
+}

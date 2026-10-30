@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Segredos
+.env
+
+# Banco local
+reunioes.db
+reunioes.db-shm
+reunioes.db-wal
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+
+# SO / IDE
+.DS_Store
+Thumbs.db
+.vscode/
